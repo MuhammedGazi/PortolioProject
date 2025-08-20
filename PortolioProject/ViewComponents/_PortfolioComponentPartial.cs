@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PortolioProject.DAL.Context;
 
 namespace PortolioProject.ViewComponents
 {
     public class _PortfolioComponentPartial:ViewComponent
     {
+        PortfolioContext context=new PortfolioContext();
         public IViewComponentResult Invoke()
         {
-            return View();
+            var values=context.Portfolios.ToList();
+            return View(values);
         }
     }
 }

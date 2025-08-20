@@ -1,0 +1,67 @@
+﻿@model List<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>Hakkında Alanı Verileri</h2>
+        </div>
+        <div class="card-body">
+            <p>
+                @* Yeni bir "About" nesnesi oluşturma sayfasına yönlendirir *@
+                <a asp-action="CreateAbout" class="btn btn-primary">Yeni Kayıt Ekle</a>
+            </p>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Başlık
+                        </th>
+                        <th>
+                            Alt Açıklama
+                        </th>
+                        <th>
+                            Detaylar
+                        </th>
+                        <th>
+                            İşlemler
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* Modeldeki her bir öğe için tablonun bir satırını oluşturur *@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AboutId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Details)
+                            </td>
+                            <td>
+                                @* İlgili kaydın ID'sini kullanarak Güncelleme ve Silme eylemlerine yönlendirir *@
+                                <a asp-action="EditAbout" asp-route-id="@item.AboutId" class="btn btn-sm btn-warning">Güncelle</a>
+                                <a asp-action="DeleteAbout" asp-route-id="@item.AboutId" class="btn btn-sm btn-danger">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
